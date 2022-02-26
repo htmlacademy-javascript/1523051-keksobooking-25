@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Евгений Киргизов](https://up.htmlacademy.ru/javascript/25/user/1523051).
-* Наставник: [Егор Дьяченко](https://htmlacademy.ru/profile/semperhomolupus).
+* Наставник: [Даниил Стерликов](https://htmlacademy.ru/profile/id1588317).
 
 ---
 
