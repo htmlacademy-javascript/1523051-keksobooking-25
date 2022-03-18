@@ -34,10 +34,11 @@ const createImmovables = () => {
   const userNumber = AVATAR_LINK[userNumberIndex];
   const latNumber = getRandomInclusive(35.65000, 35.70000, 5);
   const lngNumber = getRandomInclusive(139.70000, 139.80000, 5);
+
   return {
     author: {avatar: `img/avatars/user${ userNumber }.png`},
     offer: {
-      title: `Просторный ${  offer.rooms  }комнатный`,
+      title: 'Сдается в аренду',
       address: `${latNumber  } ${  lngNumber}`,
       price: getRandomInt(10000, 100000),
       type: TYPE_IMMOVABLES[getRandomInt(0, 4)],
@@ -46,7 +47,7 @@ const createImmovables = () => {
       checkin: TIME_CHECKIN[getRandomInt(0, 2)],
       checkout: TIME_CHECKOUT[getRandomInt(0, 2)],
       features: FEATURES.slice(0, getRandomInt(0, 6)),
-      description: '',
+      description: 'Просторная и светлая, с развитой инфраструктурой',
       photos: PHOTOS.slice(0, getRandomInt(0, 3)),
     },
     location: {
@@ -56,6 +57,6 @@ const createImmovables = () => {
   };
 };
 
-const similarWizards = Array.from({length: 4}, createImmovables);
+const IMMOVABLES = Array.from({length: 4}, createImmovables);
 
-console.log(similarWizards);
+console.log(IMMOVABLES);
