@@ -27,17 +27,17 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-let getFeatures = () => {
-  const FEATURES_COPY = FEATURES.slice();
-  const OFFER_FEATURES = [];
-  const LENGHT = getRandomInt(1,FEATURES_COPY.length);
-  for (let p = 0; p < LENGHT; p++) {
-    const featureIndex = getRandomInt(0, FEATURES_COPY.length-1);
-    const OFFER_FEATURES_ELEMENT = FEATURES_COPY[featureIndex];
-    FEATURES_COPY.slice(featureIndex, 1);
-    OFFER_FEATURES[p] = OFFER_FEATURES_ELEMENT;
+const getFeatures = () => {
+  const featuresCopy = FEATURES.slice();
+  const offerFeatures = [];
+  const length = getRandomInt(1,featuresCopy.length);
+  for (let p = 0; p < length; p++) {
+    const featureIndex = getRandomInt(0, featuresCopy.length-1);
+    const offerFeaturesElement = featuresCopy[featureIndex];
+    featuresCopy.slice(featureIndex, 1);
+    offerFeatures[p] = offerFeaturesElement;
   }
-  return OFFER_FEATURES;
+  return offerFeatures;
 };
 
 const createOffer = (i) => {
@@ -65,4 +65,5 @@ const createOffer = (i) => {
   };
 };
 
-const OFFERS = Array.from({length: 10}, (e,i) => createOffer(i));
+const offers = Array.from({length: 10}, (e,i) => createOffer(i));
+offers.slice();
