@@ -1,5 +1,5 @@
-import {getRandomInt} from './/util.js';
-import {getRandomInclusive} from './/util.js';
+import {getRandomInt} from './util.js';
+import {getRandomInclusive} from './util.js';
 
 const AVATAR_LINK = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -11,6 +11,11 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
+const LAT_NUMBER_MIN = 35.65000;
+const LAT_NUMBER_MAX = 35.70000;
+const LNG_NUMBER_MIN = 139.70000;
+const LNG_NUMBER_MAX = 139.80000;
+
 
 const getFeatures = () => {
   const featuresCopy = FEATURES.slice();
@@ -26,8 +31,8 @@ const getFeatures = () => {
 };
 
 const createOffer = (i) => {
-  const latNumber = getRandomInclusive(35.65000, 35.70000, 5);
-  const lngNumber = getRandomInclusive(139.70000, 139.80000, 5);
+  const latNumber = getRandomInclusive(LAT_NUMBER_MIN, LAT_NUMBER_MAX, 5);
+  const lngNumber = getRandomInclusive(LNG_NUMBER_MIN, LNG_NUMBER_MAX, 5);
   return {
     author: {avatar: `img/avatars/user${ AVATAR_LINK[i] }.png`},
     offer: {
@@ -50,5 +55,5 @@ const createOffer = (i) => {
   };
 };
 
-const offers = Array.from({length: 10}, (e,i) => createOffer(i));
-export {offers};
+const getOffers = (count) => Array.from({length: count}, (e,i) => createOffer(i));
+export {getOffers};

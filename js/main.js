@@ -1,3 +1,3 @@
-import {offers} from './/data.js';
+import {getOffers} from './data.js';
 
-offers.slice();
+getOffers(10);
