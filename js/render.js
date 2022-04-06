@@ -4,12 +4,27 @@ const similarOfferTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const getDeclension = (rooms,guests) => {
-  const numberOfRoomsGuests = rooms===1 & guests===1 ? '1 комната для 1 гостя':
-    rooms===1 & guests>=2 ? `1 комната для ${  guests  } гостей`:
-      rooms>=2 & rooms<=4 & guests===1 ? `${rooms  } комнаты для 1 гостя`:
-        rooms>=2 & rooms<=4 & guests>=2 ? `${rooms  } комнаты для ${  guests  } гостей`:
-          rooms>=5 & rooms===1 ? `${rooms  } комнат для 1 гостя`: `${rooms  } комнат для ${  guests  } гостей`;
+const getDeclension = (rooms,guests,declensions) => {
+  let numberOfRoomsGuests = '';
+  switch (rooms) {
+    case 1:
+      numberOfRoomsGuests = `${rooms} ${ declensions[0]} для `;
+      break;
+    case 2:
+    case 3:
+    case 4:
+      numberOfRoomsGuests = `${rooms} ${ declensions[1]} для `;
+      break;
+    default:
+      numberOfRoomsGuests = `${rooms} ${ declensions[2]} для `;
+  }
+  switch (guests) {
+    case 1:
+      numberOfRoomsGuests += `${guests} ${ declensions[3]}`;
+      break;
+    default:
+      numberOfRoomsGuests += `${guests} ${ declensions[4]}`;
+  }
   return numberOfRoomsGuests;
 };
 
@@ -34,9 +49,8 @@ const renderOffers = (count) => {
     offerElement.querySelector('.popup__text--price').textContent = `${offer.offer.price  } ${  offerElement.querySelector('span').textContent}`;
     offerElement.querySelector('.popup__type').textContent = offer.offer.type;
     offerElement.querySelector('.popup__text--capacity').textContent = offer.offer.type;
-    offerElement.querySelector('.popup__text--capacity').textContent = getDeclension(offer.offer.rooms,offer.offer.guests);
+    offerElement.querySelector('.popup__text--capacity').textContent = getDeclension(offer.offer.rooms,offer.offer.guests,['комната', 'комнаты', 'комнат', 'гостя', 'гостей']);
     offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${  offer.offer.checkin  }, выезд до ${  offer.offer.checkout}`;
-
     const featureContainer = offerElement.querySelector('.popup__features');
     const featureListFragment = document.createDocumentFragment();
     offer.offer.features.forEach((featureItem) => {
