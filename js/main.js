@@ -1,3 +1,3 @@
-import {getOffers} from './data.js';
+import {renderOffers} from './render.js';
 
-getOffers(10);
+renderOffers(1);
