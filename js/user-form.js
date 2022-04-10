@@ -3,7 +3,7 @@ const form = document.querySelector('.ad-form');
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
-  errorTextTag: 'span'
+  errorTextTag: 'p'
 });
 
 const roomNumberField = form.querySelector('#room_number');
@@ -11,29 +11,30 @@ const capacityField = form.querySelector('#capacity');
 
 const checkingNumberGuests = () => roomNumberField.value >= capacityField.value;
 
-const getErrorMessage = (valueRooms, valueGuests) => {
+const getErrorMessage = (valueRooms) => {
   let errorMessageText = '';
-  switch (valueRooms) {
-    case 1:
-      errorMessageText = `${  valueGuests[0].textContent}`;
+  switch (valueRooms.value) {
+    case '1':
+      errorMessageText = 'Выбранное количество комнат для 1 гостя';
       break;
-    case 2:
-      errorMessageText = `${  valueGuests[1].textContent  } или ${  valueGuests[0].textContent}`;
+    case '2':
+      errorMessageText = 'Выбранное количество комнат для 1 гостя или для 2 гостей';
       break;
-    case 3:
-      errorMessageText = `${  valueGuests[2].textContent  }, ${  valueGuests[1].textContent  } или ${  valueGuests[0].textContent}`;
+    case '3':
+      errorMessageText = 'Выбранное количество комнат для 1 гостя, для 2 гостей или для 3 гостей';
       break;
-    default:
-      errorMessageText = `${  valueGuests[3].textContent}`;
+    case '4':
+      errorMessageText = 'Выбранное количество комнат не для гостей';
+      break;
   }
   return errorMessageText;
 };
 
-roomNumberField.addEventListener ('change', ()=> {
+capacityField.addEventListener ('change', ()=> {
   pristine.addValidator(
     form.querySelector('#capacity'),
     checkingNumberGuests,
-    getErrorMessage(roomNumberField.value,capacityField.children)
+    getErrorMessage(roomNumberField)
   );
 });
 
@@ -66,8 +67,7 @@ typeHouse.addEventListener ('change', ()=> {
   }
 });
 
-
-priceHouse.addEventListener ('change', ()=> {
+priceHouse.addEventListener ('change', () => {
   const checkingPrice = () => priceHouse.getAttribute('min') > priceHouse.value;
   pristine.addValidator(
     form.querySelector('#price'),
@@ -97,3 +97,18 @@ timeIn.addEventListener ('change', ()=> {
       break;
   }
 });
+
+timeOut.addEventListener ('change', ()=> {
+  switch (timeOut.value) {
+    case '12:00':
+      timeIn.value = '12:00';
+      break;
+    case '13:00':
+      timeIn.value = '13:00';
+      break;
+    case '14:00':
+      timeIn.value = '14:00';
+      break;
+  }
+});
+
