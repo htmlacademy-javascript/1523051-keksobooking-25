@@ -30,85 +30,61 @@ const getErrorMessage = (valueRooms) => {
   return errorMessageText;
 };
 
-capacityField.addEventListener ('change', ()=> {
-  pristine.addValidator(
-    form.querySelector('#capacity'),
-    checkingNumberGuests,
-    getErrorMessage(roomNumberField)
-  );
-});
+pristine.addValidator(
+  form.querySelector('#capacity'),
+  checkingNumberGuests,
+  getErrorMessage(roomNumberField)
+);
 
-const typeHouse = form.querySelector('#type');
-const priceHouse = form.querySelector('#price');
+const houseTypeField = form.querySelector('#type');
+const housePriceField = form.querySelector('#price');
 
-const getPrice = (value) => {
-  priceHouse.removeAttribute('placeholder');
-  priceHouse.setAttribute('placeholder', value);
-  priceHouse.setAttribute('min', value);
+const getPriceField = (value) => {
+  housePriceField.removeAttribute('placeholder');
+  housePriceField.setAttribute('placeholder', value);
+  housePriceField.setAttribute('min', value);
 };
 
-typeHouse.addEventListener ('change', ()=> {
-  switch (typeHouse.value) {
+houseTypeField.addEventListener ('change', ()=> {
+  switch (houseTypeField.value) {
     case 'bungalow':
-      getPrice(0);
+      getPriceField(0);
       break;
     case 'flat':
-      getPrice(1000);
+      getPriceField(1000);
       break;
     case 'hotel':
-      getPrice(3000);
+      getPriceField(3000);
       break;
     case 'house':
-      getPrice(5000);
+      getPriceField(5000);
       break;
     case 'palace':
-      getPrice(10000);
+      getPriceField(10000);
       break;
   }
 });
 
-priceHouse.addEventListener ('change', () => {
-  const checkingPrice = () => priceHouse.getAttribute('min') > priceHouse.value;
-  pristine.addValidator(
-    form.querySelector('#price'),
-    checkingPrice,
-    'Указанная сумма меньше минимальной'
-  );
+const checkingHousePrice = () => parseInt(housePriceField.getAttribute('min'),10) <= housePriceField.value;
+
+pristine.addValidator(
+  form.querySelector('#price'),
+  checkingHousePrice,
+  'Указанная сумма меньше минимальной'
+);
+
+const timeInField = form.querySelector('#timein');
+const timeOutField = form.querySelector('#timeout');
+
+timeInField.addEventListener ('change', ()=> {
+  timeOutField.value = timeInField.value;
+});
+
+timeOutField.addEventListener ('change', ()=> {
+  timeInField.value = timeOutField.value;
 });
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
-
-const timeIn = form.querySelector('#timein');
-const timeOut = form.querySelector('#timeout');
-
-timeIn.addEventListener ('change', ()=> {
-  switch (timeIn.value) {
-    case '12:00':
-      timeOut.value = '12:00';
-      break;
-    case '13:00':
-      timeOut.value = '13:00';
-      break;
-    case '14:00':
-      timeOut.value = '14:00';
-      break;
-  }
-});
-
-timeOut.addEventListener ('change', ()=> {
-  switch (timeOut.value) {
-    case '12:00':
-      timeIn.value = '12:00';
-      break;
-    case '13:00':
-      timeIn.value = '13:00';
-      break;
-    case '14:00':
-      timeIn.value = '14:00';
-      break;
-  }
-});
-
