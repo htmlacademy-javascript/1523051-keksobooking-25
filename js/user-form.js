@@ -33,36 +33,44 @@ const getErrorMessage = (valueRooms) => {
 pristine.addValidator(
   form.querySelector('#capacity'),
   checkingNumberGuests,
-  getErrorMessage(roomNumberField)
+  () => getErrorMessage(roomNumberField)
 );
 
 const houseTypeField = form.querySelector('#type');
 const housePriceField = form.querySelector('#price');
 
-const getPriceField = (value) => {
+const setPriceField = (value) => {
   housePriceField.removeAttribute('placeholder');
   housePriceField.setAttribute('placeholder', value);
   housePriceField.setAttribute('min', value);
 };
 
-houseTypeField.addEventListener ('change', ()=> {
+const setPriceForHouseType = () => {
   switch (houseTypeField.value) {
     case 'bungalow':
-      getPriceField(0);
+      setPriceField(0);
       break;
     case 'flat':
-      getPriceField(1000);
+      setPriceField(1000);
       break;
     case 'hotel':
-      getPriceField(3000);
+      setPriceField(3000);
       break;
     case 'house':
-      getPriceField(5000);
+      setPriceField(5000);
       break;
     case 'palace':
-      getPriceField(10000);
+      setPriceField(10000);
       break;
   }
+};
+
+window.addEventListener ('load', ()=> {
+  setPriceForHouseType();
+});
+
+houseTypeField.addEventListener ('change', ()=> {
+  setPriceForHouseType();
 });
 
 const checkingHousePrice = () => parseInt(housePriceField.getAttribute('min'),10) <= housePriceField.value;
