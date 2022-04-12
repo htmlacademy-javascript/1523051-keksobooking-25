@@ -6,6 +6,10 @@ const pristine = new Pristine(form, {
   errorTextTag: 'p'
 });
 
+const address = form.querySelector('#address');
+const latCenter = 35.70000;
+const lngCenter = 139.42500;
+
 const roomNumberField = form.querySelector('#room_number');
 const capacityField = form.querySelector('#capacity');
 
@@ -66,6 +70,7 @@ const setPriceForHouseType = () => {
 };
 
 window.addEventListener ('load', ()=> {
+  address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
   setPriceForHouseType();
 });
 
@@ -93,6 +98,5 @@ timeOutField.addEventListener ('change', ()=> {
 });
 
 form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+  if (!pristine.validate()) {evt.preventDefault();}
 });
