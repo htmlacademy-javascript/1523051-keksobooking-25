@@ -9,6 +9,10 @@ const turnOnInactiveState = () => {
   mapFilters.children.setAttribute('disabled', 'disabled');
 };
 
+window.addEventListener('DOMContentLoaded', ()=> {
+  turnOnInactiveState; 
+});
+
 const turnOnActiveState = () => {
   form.classList.remove('ad-form--disabled');
   form.querySelectorAll('fieldset').removeAttribute('disabled');
@@ -17,5 +21,5 @@ const turnOnActiveState = () => {
   mapFilters.children.removeAttribute('disabled');
 };
 
-turnOnInactiveState();
-turnOnActiveState();
+export {turnOnActiveState};
+

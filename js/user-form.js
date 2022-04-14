@@ -1,4 +1,5 @@
 const form = document.querySelector('.ad-form');
+const sliderElement = form.querySelector('.ad-form__slider');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -49,22 +50,55 @@ const setPriceField = (value) => {
   housePriceField.setAttribute('min', value);
 };
 
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 0,
+  connect: 'lower',
+    format: {
+    to: function (value) {
+return value.toFixed(0);
+      },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
+const setMinFieldSlider = (minField) => {
+  sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: minField,
+        max: 100000,
+      },
+      step: 1,
+      start: minField,
+    });
+}
+
 const setPriceForHouseType = () => {
   switch (houseTypeField.value) {
     case 'bungalow':
       setPriceField(0);
+      setMinFieldSlider(0);
       break;
     case 'flat':
       setPriceField(1000);
+      setMinFieldSlider(1000);
       break;
     case 'hotel':
       setPriceField(3000);
+      setMinFieldSlider(3000);
       break;
     case 'house':
       setPriceField(5000);
+      setMinFieldSlider(5000);
       break;
     case 'palace':
       setPriceField(10000);
+      setMinFieldSlider(10000);
       break;
   }
 };
@@ -76,6 +110,10 @@ window.addEventListener ('load', ()=> {
 
 houseTypeField.addEventListener ('change', ()=> {
   setPriceForHouseType();
+});
+
+sliderElement.noUiSlider.on('update', () => {
+  housePriceField.value = sliderElement.noUiSlider.get();
 });
 
 const checkingHousePrice = () => parseInt(housePriceField.getAttribute('min'),10) <= housePriceField.value;
@@ -100,3 +138,5 @@ timeOutField.addEventListener ('change', ()=> {
 form.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {evt.preventDefault();}
 });
+
+export {address};

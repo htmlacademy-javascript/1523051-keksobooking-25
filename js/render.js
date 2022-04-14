@@ -51,6 +51,7 @@ const renderOffers = (count) => {
     offerElement.querySelector('.popup__text--capacity').textContent = offer.offer.type;
     offerElement.querySelector('.popup__text--capacity').textContent = getDeclension(offer.offer.rooms,offer.offer.guests,['комната', 'комнаты', 'комнат', 'гостя', 'гостей']);
     offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${  offer.offer.checkin  }, выезд до ${  offer.offer.checkout}`;
+
     const featureContainer = offerElement.querySelector('.popup__features');
     const featureListFragment = document.createDocumentFragment();
     offer.offer.features.forEach((featureItem) => {
