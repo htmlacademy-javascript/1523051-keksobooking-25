@@ -10,7 +10,7 @@ const turnOnInactiveState = () => {
 };
 
 window.addEventListener('DOMContentLoaded', ()=> {
-  turnOnInactiveState; 
+  turnOnInactiveState;
 });
 
 const turnOnActiveState = () => {

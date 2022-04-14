@@ -57,10 +57,10 @@ noUiSlider.create(sliderElement, {
   },
   start: 0,
   connect: 'lower',
-    format: {
+  format: {
     to: function (value) {
-return value.toFixed(0);
-      },
+      return value.toFixed(0);
+    },
     from: function (value) {
       return parseFloat(value);
     },
@@ -69,14 +69,14 @@ return value.toFixed(0);
 
 const setMinFieldSlider = (minField) => {
   sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: minField,
-        max: 100000,
-      },
-      step: 1,
-      start: minField,
-    });
-}
+    range: {
+      min: minField,
+      max: 100000,
+    },
+    step: 1,
+    start: minField,
+  });
+};
 
 const setPriceForHouseType = () => {
   switch (houseTypeField.value) {
