@@ -1,6 +1,4 @@
-import './states.js';
-import {renderOffers} from './render.js';
 import './user-form.js';
+import {setOffersPin} from './map.js';
 
-
-renderOffers(10);
+setOffersPin(10);

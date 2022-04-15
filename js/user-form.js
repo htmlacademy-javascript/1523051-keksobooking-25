@@ -140,3 +140,5 @@ form.addEventListener('submit', (evt) => {
 });
 
 export {address};
+export {latCenter};
+export {lngCenter};
