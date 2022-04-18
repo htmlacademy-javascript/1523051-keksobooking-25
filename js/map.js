@@ -6,9 +6,9 @@ import {latCenter} from './user-form.js';
 import {lngCenter} from './user-form.js';
 
 
-window.addEventListener('DOMContentLoaded', ()=> {
+/*document.addEventListener('DOMContentLoaded', ()=> {
   turnOnInactiveState();
-});
+});*/
 
 const createMap = () => {
   const map = L.map('map-canvas')

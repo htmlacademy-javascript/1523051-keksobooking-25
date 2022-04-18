@@ -1,5 +1,6 @@
 const form = document.querySelector('.ad-form');
 const sliderElement = form.querySelector('.ad-form__slider');
+const resetButton = form.querySelector('.ad-form__reset');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -10,6 +11,11 @@ const pristine = new Pristine(form, {
 const address = form.querySelector('#address');
 const latCenter = 35.70000;
 const lngCenter = 139.42500;
+
+const reset = () => {
+  form.reset();
+  address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
+};
 
 const roomNumberField = form.querySelector('#room_number');
 const capacityField = form.querySelector('#capacity');
@@ -135,10 +141,39 @@ timeOutField.addEventListener ('change', ()=> {
   timeInField.value = timeOutField.value;
 });
 
-form.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {evt.preventDefault();}
-});
+const setUserFormSubmit = (onSuccess, onError) => {
+  form.addEventListener('submit', (evt) => {
+    if (!pristine.validate()) {
+      evt.preventDefault();
+    } else {
+      evt.preventDefault();
+      const formData = new FormData(evt.target);
+
+      fetch(
+        'https://25.javascript.pages.academy/keksobooking',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            reset();
+          } else {
+            onError();
+          }
+        })
+        .catch(() => {
+          onError();
+        });
+    }
+  });};
+
+resetButton.addEventListener('click', () => {reset();});
+
 
 export {address};
 export {latCenter};
 export {lngCenter};
+export {setUserFormSubmit};
