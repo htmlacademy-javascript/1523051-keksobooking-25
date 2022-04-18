@@ -8,19 +8,18 @@ const errorMessageTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
-const closeMessageButton = errorMessageTemplate.querySelector('.error__button');
-
 const getErrorMessage = () => {
   const errorMessage = errorMessageTemplate.cloneNode(true);
   errorMessage.querySelector('.error__message').textContent = 'Произошла ошибка отправки формы!';
 
   pageBody.append(errorMessage);
-
+  const closeMessageButton = document.querySelector('.error__button');
+  const errorWindow = document.querySelector('.error');
   closeMessageButton.addEventListener('click', () => {
-    errorMessage.querySelector('.success').classList.add('hidden');});
+    errorWindow.classList.add('hidden');});
 
-  closeMessageButton.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === 27) {errorMessage.querySelector('.success').classList.add('hidden');}});
+  document.addEventListener('keydown', (evt) => {
+    if (evt.keyCode === 27) {errorWindow.classList.add('hidden');}});
 };
 
 const getSuccessMessage = () => {

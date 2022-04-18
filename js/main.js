@@ -1,4 +1,5 @@
 import './user-form.js';
+import {showAlert} from './util.js';
 import {createMap} from './map.js';
 import {createMainMarker} from './map.js';
 import {setOffersPin} from './map.js';
@@ -12,6 +13,9 @@ createMainMarker(map);
 
 fetch('https://25.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
+  .catch(() => {
+    showAlert('Не удалось соединиться с сервером');
+  })
   .then((offersServer) => {
     setOffersPin(offersServer,map);
   });

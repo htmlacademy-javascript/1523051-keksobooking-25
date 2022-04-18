@@ -1,3 +1,4 @@
+
 const form = document.querySelector('.ad-form');
 const sliderElement = form.querySelector('.ad-form__slider');
 const resetButton = form.querySelector('.ad-form__reset');
@@ -5,17 +6,13 @@ const resetButton = form.querySelector('.ad-form__reset');
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
-  errorTextTag: 'p'
+  errorTextTag: 'p',
+  errorTextClass: 'form__error',
 });
 
 const address = form.querySelector('#address');
 const latCenter = 35.70000;
 const lngCenter = 139.42500;
-
-const reset = () => {
-  form.reset();
-  address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
-};
 
 const roomNumberField = form.querySelector('#room_number');
 const capacityField = form.querySelector('#capacity');
@@ -109,6 +106,12 @@ const setPriceForHouseType = () => {
   }
 };
 
+const reset = () => {
+  form.reset();
+  address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
+  setPriceForHouseType();
+};
+
 window.addEventListener ('load', ()=> {
   address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
   setPriceForHouseType();
@@ -143,10 +146,8 @@ timeOutField.addEventListener ('change', ()=> {
 
 const setUserFormSubmit = (onSuccess, onError) => {
   form.addEventListener('submit', (evt) => {
-    if (!pristine.validate()) {
-      evt.preventDefault();
-    } else {
-      evt.preventDefault();
+    evt.preventDefault();
+    if (pristine.validate()) {
       const formData = new FormData(evt.target);
 
       fetch(
@@ -167,10 +168,12 @@ const setUserFormSubmit = (onSuccess, onError) => {
         .catch(() => {
           onError();
         });
-    }
-  });};
+    }});};
 
-resetButton.addEventListener('click', () => {reset();});
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  reset();
+});
 
 
 export {address};

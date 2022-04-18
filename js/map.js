@@ -1,12 +1,11 @@
 import {renderOffer} from './render.js';
-import {turnOnActiveState} from './states.js';
 import {turnOnInactiveState} from './states.js';
+import {turnOnActiveState} from './states.js';
 import {address} from './user-form.js';
 import {latCenter} from './user-form.js';
 import {lngCenter} from './user-form.js';
 
-
-/*document.addEventListener('DOMContentLoaded', ()=> {
+/*document.addEventListener('DOMContentLoaded', () => {
   turnOnInactiveState();
 });*/
 
@@ -28,6 +27,7 @@ const createMap = () => {
   ).addTo(map);
   return map;
 };
+
 
 const createMainMarker = (map) => {
   const mainPinIcon = L.icon({
