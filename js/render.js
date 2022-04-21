@@ -38,19 +38,21 @@ const createImage = (link) => {
 
 const setFeatures = (valueFeatures, container) => {
   const featureListFragment = document.createDocumentFragment();
-  valueFeatures.forEach((featureItem) => {
-    const featureListItem = container.querySelector(`.popup__feature--${  featureItem}`);
-    if (featureListItem) {
-      featureListFragment.append(featureListItem);
-    }
-  });
-  container.innerHTML = '';
-  container.append(featureListFragment);
+  if (valueFeatures) {
+    valueFeatures.forEach((featureItem) => {
+      const featureListItem = container.querySelector(`.popup__feature--${  featureItem}`);
+      if (featureListItem) {
+        featureListFragment.append(featureListItem);
+      }
+    });
+    container.innerHTML = '';
+    container.append(featureListFragment);
+  } else {container.innerHTML = '';}
 };
 
 const setPhoto = (photos, container) => {
   const photoListFragment = document.createDocumentFragment();
-  if (photos.length > 0){
+  if (photos){
     photos.forEach((photoSrc) => {
       photoListFragment.append(createImage(photoSrc));
     });

@@ -1,15 +1,13 @@
 import {renderOffer} from './render.js';
 import {turnOnActiveState} from './states.js';
-import {turnOnInactiveState} from './states.js';
 import {address} from './user-form.js';
 import {latCenter} from './user-form.js';
 import {lngCenter} from './user-form.js';
+import {turnOnInactiveState} from './states.js';
 
+if (document.readyState === 'interactive') {turnOnInactiveState();}
 
-window.addEventListener('DOMContentLoaded', ()=> {
-  turnOnInactiveState();
-});
-
+const array = [];
 const createMap = () => {
   const map = L.map('map-canvas')
     .on('load', () => {
@@ -28,6 +26,7 @@ const createMap = () => {
   ).addTo(map);
   return map;
 };
+
 
 const createMainMarker = (map) => {
   const mainPinIcon = L.icon({
@@ -75,9 +74,13 @@ const createMarker = (map,lat,lng,offer) => {
 const setOffersPin = (offers,map) => {
   offers.forEach((offer) => {
     createMarker(map,offer.location.lat,offer.location.lng,offer);
+    array.push(offer);
   });
 };
 
 export {setOffersPin};
 export {createMainMarker};
 export {createMap};
+export {array};
+
+
