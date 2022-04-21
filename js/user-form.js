@@ -1,7 +1,7 @@
-
 const form = document.querySelector('.ad-form');
 const sliderElement = form.querySelector('.ad-form__slider');
 const resetButton = form.querySelector('.ad-form__reset');
+
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -174,7 +174,6 @@ resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   reset();
 });
-
 
 export {address};
 export {latCenter};

@@ -16,10 +16,10 @@ const getErrorMessage = () => {
   const closeMessageButton = document.querySelector('.error__button');
   const errorWindow = document.querySelector('.error');
   closeMessageButton.addEventListener('click', () => {
-    errorWindow.classList.add('hidden');});
+    errorWindow.remove();});
 
   document.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === 27) {errorWindow.classList.add('hidden');}});
+    if (evt.keyCode === 27) {errorWindow.remove();}});
 };
 
 const getSuccessMessage = () => {

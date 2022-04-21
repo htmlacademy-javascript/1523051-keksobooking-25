@@ -57,4 +57,4 @@ const createOffer = (i) => {
 
 const getOffers = (count) => Array.from({length: count}, (e,i) => createOffer(i));
 export {getOffers};
-
+export {TYPES};
